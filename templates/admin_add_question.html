@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Add Question | Virtual Interview Assistant &amp; Evaluating System</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1f5f9,
+                    #e0e7ff
+                );
+
+            color: #1e293b;
+
+            min-height: 100vh;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e3a8a
+                );
+
+            color: white;
+
+            padding: 18px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 4px 15px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.18
+                );
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .brand-icon {
+
+            font-size: 27px;
+        }
+
+
+        .brand-text {
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+
+        .admin-badge {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.2
+                );
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            color: #dbeafe;
+        }
+
+
+        /* ==========================================
+           MAIN
+        ========================================== */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 800px;
+
+            margin: 40px auto 60px;
+        }
+
+
+        /* ==========================================
+           PAGE HEADER
+        ========================================== */
+
+        .page-header {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 28px 30px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.08
+                );
+        }
+
+
+        .page-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+
+        .title-icon {
+
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 14px;
+
+            background: #eff6ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+
+        .page-title h1 {
+
+            color: #0f172a;
+
+            font-size: 26px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .page-title p {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==========================================
+           FORM CARD
+        ========================================== */
+
+        .form-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.08
+                );
+        }
+
+
+        .form-group {
+
+            margin-bottom: 22px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #334155;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .required {
+
+            color: #dc2626;
+        }
+
+
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            background: #f8fafc;
+
+            color: #1e293b;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s ease;
+        }
+
+
+        select {
+
+            cursor: pointer;
+        }
+
+
+        select:focus,
+        textarea:focus {
+
+            border-color: #2563eb;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.1
+                );
+        }
+
+
+        textarea {
+
+            min-height: 125px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+        }
+
+
+        #expected_answer {
+
+            min-height: 150px;
+        }
+
+
+        .field-help {
+
+            display: block;
+
+            margin-top: 6px;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==========================================
+           FORM GRID
+        ========================================== */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+
+        /* ==========================================
+           BUTTONS
+        ========================================== */
+
+        .form-actions {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-top: 28px;
+
+            padding-top: 22px;
+
+            border-top:
+                1px solid #e2e8f0;
+        }
+
+
+        .back-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 12px 18px;
+
+            border:
+                1px solid #cbd5e1;
+
+            background: #f8fafc;
+
+            color: #334155;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+
+        .back-button:hover {
+
+            background: #e2e8f0;
+        }
+
+
+        .submit-button {
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 13px 22px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .submit-button:hover {
+
+            background: #1d4ed8;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* ==========================================
+           INFORMATION BOX
+        ========================================== */
+
+        .info-box {
+
+            margin-top: 22px;
+
+            padding: 15px 17px;
+
+            border-radius: 11px;
+
+            background: #eff6ff;
+
+            border:
+                1px solid #bfdbfe;
+
+            color: #1e40af;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        .info-box strong {
+
+            color: #1e3a8a;
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 20px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 650px) {
+
+            header {
+
+                padding:
+                    16px 5%;
+            }
+
+
+            .brand-text {
+
+                font-size: 17px;
+            }
+
+
+            .admin-badge {
+
+                display: none;
+            }
+
+
+            .container {
+
+                width: 94%;
+
+                margin-top: 25px;
+            }
+
+
+            .page-header {
+
+                padding: 22px;
+            }
+
+
+            .page-title h1 {
+
+                font-size: 22px;
+            }
+
+
+            .form-card {
+
+                padding: 22px;
+            }
+
+
+            .form-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .form-actions {
+
+                flex-direction: column-reverse;
+
+                align-items: stretch;
+            }
+
+
+            .back-button,
+            .submit-button {
+
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header>
+
+    <div class="brand">
+
+        <span class="brand-icon">
+            🎯
+        </span>
+
+        <span class="brand-text">
+            Virtual Interview Assistant
+        </span>
+
+    </div>
+
+
+    <div class="admin-badge">
+        🔐 Administrator
+    </div>
+
+</header>
+
+
+<!-- ==========================================
+     MAIN CONTENT
+========================================== -->
+
+<main class="container">
+
+
+    <!-- PAGE TITLE -->
+
+    <section class="page-header">
+
+        <div class="page-title">
+
+            <div class="title-icon">
+                ➕
+            </div>
+
+
+            <div>
+
+                <h1>
+                    Add Interview Question
+                </h1>
+
+                <p>
+                    Create a new question for the
+                    candidate interview question bank.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FORM -->
+
+    <section class="form-card">
+
+        <form
+            action="/admin-add-question"
+            method="POST">
+
+
+            <!-- DOMAIN + DIFFICULTY -->
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="domain">
+
+                        Domain
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <select
+                        id="domain"
+                        name="domain"
+                        required>
+
+                        <option value="">
+                            Select Domain
+                        </option>
+
+                        <option value="Python">
+                            Python
+                        </option>
+
+                        <option value="Java">
+                            Java
+                        </option>
+
+                        <option value="JavaScript">
+                            JavaScript
+                        </option>
+
+                        <option value="C">
+                            C
+                        </option>
+
+                        <option value="C++">
+                            C++
+                        </option>
+
+                        <option value="HTML">
+                            HTML
+                        </option>
+
+                        <option value="CSS">
+                            CSS
+                        </option>
+
+                        <option value="SQL">
+                            SQL
+                        </option>
+
+                        <option value="DBMS">
+                            DBMS
+                        </option>
+
+                        <option value="Data Structures">
+                            Data Structures
+                        </option>
+
+                        <option value="Data Science">
+                            Data Science
+                        </option>
+
+                        <option value="Data Analytics">
+                            Data Analytics
+                        </option>
+
+                        <option value="Machine Learning">
+                            Machine Learning
+                        </option>
+
+                        <option value="Computer Networks">
+                            Computer Networks
+                        </option>
+
+                        <option value="Operating System">
+                            Operating System
+                        </option>
+
+                        <option value="Cybersecurity">
+                            Cybersecurity
+                        </option>
+
+                        <option value="Cloud Computing">
+                            Cloud Computing
+                        </option>
+
+                        <option value="HR">
+                            HR
+                        </option>
+
+                        <option value="Behavioral">
+                            Behavioral
+                        </option>
+
+                        <option value="Communication">
+                            Communication
+                        </option>
+
+                        <option value="Algorithms">
+                            Algorithms
+                        </option>
+
+                        <option value="Artificial Intelligence">
+                            Artificial Intelligence
+                        </option>
+
+                        <option value="React">
+                            React
+                        </option>
+
+                        <option value="Node.js">
+                            Node.js
+                        </option>
+
+                    </select>
+
+
+                    <span class="field-help">
+                        Choose the technical or behavioral
+                        area for this question.
+                    </span>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="difficulty">
+
+                        Difficulty
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <select
+                        id="difficulty"
+                        name="difficulty"
+                        required>
+
+                        <option value="">
+                            Select Difficulty
+                        </option>
+
+                        <option value="Easy">
+                            Easy
+                        </option>
+
+                        <option value="Medium">
+                            Medium
+                        </option>
+
+                        <option value="Hard">
+                            Hard
+                        </option>
+
+                    </select>
+
+
+                    <span class="field-help">
+                        Select the expected difficulty
+                        level of the question.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION -->
+
+            <div class="form-group">
+
+                <label for="question">
+
+                    Interview Question
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <textarea
+                    id="question"
+                    name="question"
+                    placeholder="Enter the interview question..."
+                    required></textarea>
+
+
+                <span class="field-help">
+                    Write the question exactly as it should
+                    appear to the candidate.
+                </span>
+
+            </div>
+
+
+            <!-- EXPECTED ANSWER -->
+
+            <div class="form-group">
+
+                <label for="expected_answer">
+
+                    Expected Answer
+
+                </label>
+
+
+                <textarea
+                    id="expected_answer"
+                    name="expected_answer"
+                    placeholder="Enter the expected answer or key points..."></textarea>
+
+
+                <span class="field-help">
+                    This answer is used as a reference
+                    during answer evaluation.
+                </span>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="info-box">
+
+                <strong>Tip:</strong>
+
+                Add a clear expected answer with important
+                keywords or concepts. This helps the system
+                evaluate candidate responses more effectively.
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+
+                <a
+                    href="/admin-questions"
+                    class="back-button">
+
+                    ← Back to Questions
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="submit-button">
+
+                    ➕ Add Question
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    Virtual Interview Assistant
+    &nbsp;•&nbsp;
+    Admin Question Management
+
+</footer>
+
+
+</body>
+
+</html>

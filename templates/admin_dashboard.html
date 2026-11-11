@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard | Virtual Interview Assistant &amp; Evaluating System</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1f5f9,
+                    #e0e7ff
+                );
+
+            color: #1e293b;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e3a8a
+                );
+
+            color: white;
+
+            padding: 18px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 4px 15px
+                rgba(15, 23, 42, 0.18);
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+        }
+
+
+        .brand-icon {
+
+            font-size: 27px;
+        }
+
+
+        .brand-text {
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.2px;
+        }
+
+
+        .admin-badge {
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.22);
+
+            color: #dbeafe;
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* ==========================================
+           MAIN CONTAINER
+        ========================================== */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 1150px;
+
+            margin: 40px auto 60px;
+        }
+
+
+        /* ==========================================
+           WELCOME
+        ========================================== */
+
+        .welcome-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(15, 23, 42, 0.08);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+
+        .welcome-content h1 {
+
+            color: #0f172a;
+
+            font-size: 28px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .welcome-content p {
+
+            color: #64748b;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+        }
+
+
+        .welcome-icon {
+
+            width: 75px;
+
+            height: 75px;
+
+            border-radius: 20px;
+
+            background: #eff6ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 38px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* ==========================================
+           SECTION HEADER
+        ========================================== */
+
+        .section-header {
+
+            margin-bottom: 18px;
+        }
+
+
+        .section-header h2 {
+
+            color: #0f172a;
+
+            font-size: 22px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .section-header p {
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* ==========================================
+           SETTINGS CARD
+        ========================================== */
+
+        .settings-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(15, 23, 42, 0.08);
+        }
+
+
+        .settings-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .settings-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            background: #eff6ff;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+
+        .settings-title h2 {
+
+            font-size: 21px;
+
+            color: #0f172a;
+        }
+
+
+        .settings-title p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 3px;
+        }
+
+
+        /* ==========================================
+           FORM
+        ========================================== */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+
+        .form-group label {
+
+            color: #334155;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .form-group select,
+        .form-group input {
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            background: #f8fafc;
+
+            color: #1e293b;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s ease;
+        }
+
+
+        .form-group select:focus,
+        .form-group input:focus {
+
+            border-color: #2563eb;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, 0.10);
+        }
+
+
+        .save-area {
+
+            margin-top: 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .save-button {
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #1d4ed8
+                );
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .save-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 15px
+                rgba(37, 99, 235, 0.25);
+        }
+
+
+        #message {
+
+            font-size: 13px;
+
+            color: #166534;
+
+            font-weight: 600;
+        }
+
+
+        /* ==========================================
+           ADMIN OPTIONS
+        ========================================== */
+
+        .options-section {
+
+            margin-top: 5px;
+        }
+
+
+        .options-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .option-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            border:
+                1px solid #e2e8f0;
+
+            box-shadow:
+                0 8px 25px
+                rgba(15, 23, 42, 0.06);
+
+            transition: 0.2s ease;
+        }
+
+
+        .option-card:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 14px 30px
+                rgba(15, 23, 42, 0.10);
+        }
+
+
+        .option-icon {
+
+            width: 50px;
+
+            height: 50px;
+
+            border-radius: 13px;
+
+            background: #eff6ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 23px;
+
+            margin-bottom: 16px;
+        }
+
+
+        .option-card h3 {
+
+            color: #0f172a;
+
+            font-size: 17px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .option-card p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            margin-bottom: 18px;
+        }
+
+
+        .option-button {
+
+            width: 100%;
+
+            border: none;
+
+            background: #f1f5f9;
+
+            color: #1e3a8a;
+
+            padding: 11px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .option-button:hover {
+
+            background: #dbeafe;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 20px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 900px) {
+
+            .options-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .welcome-card {
+
+                padding: 22px;
+
+                align-items: flex-start;
+            }
+
+
+            .welcome-content h1 {
+
+                font-size: 24px;
+            }
+
+
+            .welcome-icon {
+
+                display: none;
+            }
+
+
+            .settings-card {
+
+                padding: 22px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            header {
+
+                padding: 16px 5%;
+            }
+
+
+            .brand-text {
+
+                font-size: 17px;
+            }
+
+
+            .admin-badge {
+
+                display: none;
+            }
+
+
+            .container {
+
+                width: 94%;
+
+                margin-top: 25px;
+            }
+
+
+            .save-area {
+
+                align-items: stretch;
+
+                flex-direction: column;
+            }
+
+
+            .save-button {
+
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header>
+
+    <div class="brand">
+
+        <span class="brand-icon">
+            🎯
+        </span>
+
+        <span class="brand-text">
+            Virtual Interview Assistant
+        </span>
+
+    </div>
+
+
+    <div class="admin-badge">
+        🔐 Administrator
+    </div>
+
+</header>
+
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<main class="container">
+
+
+    <!-- ==========================================
+         WELCOME CARD
+    ========================================== -->
+
+    <section class="welcome-card">
+
+        <div class="welcome-content">
+
+            <h1>
+                Welcome, Administrator 👋
+            </h1>
+
+            <p>
+                Manage interview settings, candidates,
+                results, and question banks from one
+                centralized dashboard.
+            </p>
+
+        </div>
+
+
+        <div class="welcome-icon">
+            🔐
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         INTERVIEW SETTINGS
+    ========================================== -->
+
+    <section class="settings-card">
+
+
+        <div class="settings-title">
+
+            <div class="settings-icon">
+                ⚙️
+            </div>
+
+            <div>
+
+                <h2>
+                    Interview Settings
+                </h2>
+
+                <p>
+                    Configure the default interview experience
+                    for candidates.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="settingsForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- DOMAIN -->
+
+                <div class="form-group">
+
+                    <label for="domain">
+                        Interview Domain
+                    </label>
+
+                    <select
+                        id="domain"
+                        required
+                    >
+
+                        <option value="">
+                            Select Domain
+                        </option>
+
+                        <option>Python</option>
+
+                        <option>Java</option>
+
+                        <option>JavaScript</option>
+
+                        <option>C</option>
+
+                        <option>C++</option>
+
+                        <option>HTML</option>
+
+                        <option>CSS</option>
+
+                        <option>SQL</option>
+
+                        <option>DBMS</option>
+
+                        <option>Data Structures</option>
+
+                        <option>Data Science</option>
+
+                        <option>Data Analytics</option>
+
+                        <option>Machine Learning</option>
+
+                        <option>Computer Networks</option>
+
+                        <option>Operating System</option>
+
+                        <option>Cybersecurity</option>
+
+                        <option>Cloud Computing</option>
+
+                        <option>HR</option>
+
+                        <option>Behavioral</option>
+
+                        <option>Communication</option>
+
+                        <option>Algorithms</option>
+
+                        <option>
+                            Artificial Intelligence
+                        </option>
+
+                        <option>React</option>
+
+                        <option>Node.js</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DIFFICULTY -->
+
+                <div class="form-group">
+
+                    <label for="difficulty">
+                        Difficulty Level
+                    </label>
+
+                    <select
+                        id="difficulty"
+                        required
+                    >
+
+                        <option value="">
+                            Select Difficulty
+                        </option>
+
+                        <option>Easy</option>
+
+                        <option>Medium</option>
+
+                        <option>Hard</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- QUESTION COUNT -->
+
+                <div class="form-group">
+
+                    <label for="questionCount">
+                        Number of Questions
+                    </label>
+
+                    <input
+                        type="number"
+                        id="questionCount"
+                        min="1"
+                        value="10"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TIME -->
+
+                <div class="form-group">
+
+                    <label for="timeLimit">
+                        Interview Time (minutes)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="timeLimit"
+                        min="1"
+                        value="10"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div class="save-area">
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+
+                    💾 Save Interview Settings
+
+                </button>
+
+
+                <p id="message"></p>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+    <!-- ==========================================
+         ADMIN OPTIONS
+    ========================================== -->
+
+    <section class="options-section">
+
+
+        <div class="section-header">
+
+            <h2>
+                Administration
+            </h2>
+
+            <p>
+                Manage candidates, interview results,
+                and question banks.
+            </p>
+
+        </div>
+
+
+        <div class="options-grid">
+
+
+            <!-- CANDIDATES -->
+
+            <div class="option-card">
+
+                <div class="option-icon">
+                    👥
+                </div>
+
+                <h3>
+                    Candidates
+                </h3>
+
+                <p>
+                    View registered candidates and
+                    manage their interview history.
+                </p>
+
+                <button
+                    class="option-button"
+                    type="button"
+                    onclick="viewCandidates()"
+                >
+
+                    View Candidates →
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULTS -->
+
+            <div class="option-card">
+
+                <div class="option-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Interview Results
+                </h3>
+
+                <p>
+                    Review candidate scores, domains,
+                    difficulty levels, and feedback.
+                </p>
+
+                <button
+                    class="option-button"
+                    type="button"
+                    onclick="viewResults()"
+                >
+
+                    View Results →
+
+                </button>
+
+            </div>
+
+
+            <!-- QUESTIONS -->
+
+            <div class="option-card">
+
+                <div class="option-icon">
+                    ❓
+                </div>
+
+                <h3>
+                    Question Management
+                </h3>
+
+                <p>
+                    Add, edit, and delete questions
+                    from the interview question bank.
+                </p>
+
+                <button
+                    class="option-button"
+                    type="button"
+                    onclick="viewQuestions()"
+                >
+
+                    Manage Questions →
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
+<footer>
+
+    Virtual Interview Assistant
+    &nbsp;•&nbsp;
+    Administration Portal
+
+</footer>
+
+
+<script>
+
+
+/* ==========================================
+   SAVE INTERVIEW SETTINGS
+========================================== */
+
+document.getElementById(
+    "settingsForm"
+).addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const domain =
+            document.getElementById(
+                "domain"
+            ).value;
+
+
+        const difficulty =
+            document.getElementById(
+                "difficulty"
+            ).value;
+
+
+        const questionCount =
+            Number(
+                document.getElementById(
+                    "questionCount"
+                ).value
+            );
+
+
+        const timeLimit =
+            Number(
+                document.getElementById(
+                    "timeLimit"
+                ).value
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        message.textContent =
+            "Saving settings...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/admin-settings",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                domain:
+                                    domain,
+
+                                difficulty:
+                                    difficulty,
+
+                                question_count:
+                                    questionCount,
+
+                                time_limit:
+                                    timeLimit
+
+                            })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.message ||
+                    "Unable to save settings.";
+
+                message.style.color =
+                    "#b91c1c";
+
+                return;
+            }
+
+
+            message.textContent =
+                "✓ Interview settings saved successfully!";
+
+            message.style.color =
+                "#166534";
+
+        }
+
+
+        catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            message.textContent =
+                "Unable to connect to server.";
+
+            message.style.color =
+                "#b91c1c";
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   VIEW CANDIDATES
+========================================== */
+
+function viewCandidates() {
+
+    window.location.href =
+        "/admin-candidates";
+
+}
+
+
+/* ==========================================
+   VIEW RESULTS
+========================================== */
+
+function viewResults() {
+
+    window.location.href =
+        "/admin-results";
+
+}
+
+
+/* ==========================================
+   VIEW QUESTIONS
+========================================== */
+
+function viewQuestions() {
+
+    window.location.href =
+        "/admin-questions";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Interview | Virtual Interview Assistant &amp; Evaluating System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef2ff,
+                    #f8fafc
+                );
+
+            color: #1e293b;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e3a8a
+                );
+
+            color: white;
+
+            padding: 18px 7%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow:
+                0 4px 15px
+                rgba(15, 23, 42, 0.15);
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 21px;
+
+            font-weight: 700;
+        }
+
+
+        .brand-icon {
+
+            font-size: 27px;
+        }
+
+
+        .back-btn {
+
+            text-decoration: none;
+
+            color: white;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.35);
+
+            padding:
+                9px 16px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+
+        .back-btn:hover {
+
+            background:
+                rgba(255, 255, 255, 0.12);
+        }
+
+
+        /* ==========================================
+           MAIN CONTAINER
+        ========================================== */
+
+        .page-container {
+
+            max-width: 1000px;
+
+            margin: 55px auto;
+
+            padding:
+                0 20px;
+        }
+
+
+        /* ==========================================
+           INTRO
+        ========================================== */
+
+        .intro {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .intro-icon {
+
+            width: 68px;
+
+            height: 68px;
+
+            margin:
+                0 auto 18px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                #dbeafe;
+
+            font-size: 32px;
+        }
+
+
+        .intro h1 {
+
+            font-size: 32px;
+
+            color: #0f172a;
+
+            margin-bottom: 10px;
+        }
+
+
+        .intro p {
+
+            color: #64748b;
+
+            font-size: 16px;
+
+            max-width: 650px;
+
+            margin:
+                0 auto;
+
+            line-height: 1.6;
+        }
+
+
+        .candidate-name {
+
+            margin-top: 12px;
+
+            font-weight: 600;
+
+            color: #2563eb;
+        }
+
+
+        /* ==========================================
+           MAIN CARD
+        ========================================== */
+
+        .setup-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 38px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(15, 23, 42, 0.10);
+
+            border:
+                1px solid #e2e8f0;
+        }
+
+
+        .card-title {
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+            color: #0f172a;
+
+            margin-bottom: 7px;
+        }
+
+
+        .card-subtitle {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ==========================================
+           FORM GRID
+        ========================================== */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 25px;
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .form-group.full {
+
+            grid-column:
+                1 / -1;
+        }
+
+
+        label {
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #334155;
+
+            margin-bottom: 9px;
+        }
+
+
+        .label-icon {
+
+            margin-right: 5px;
+        }
+
+
+        select,
+        input {
+
+            width: 100%;
+
+            padding:
+                13px 14px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            background: #f8fafc;
+
+            color: #1e293b;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+
+        select {
+
+            cursor: pointer;
+        }
+
+
+        select:focus,
+        input:focus {
+
+            border-color: #2563eb;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, 0.10);
+        }
+
+
+        input[readonly] {
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+            cursor: not-allowed;
+
+            font-weight: 600;
+        }
+
+
+        .helper-text {
+
+            margin-top: 7px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+
+        /* ==========================================
+           QUESTION COUNT BOX
+        ========================================== */
+
+        .question-info {
+
+            margin-top: 25px;
+
+            padding: 17px;
+
+            border-radius: 12px;
+
+            background:
+                #eff6ff;
+
+            border:
+                1px solid #bfdbfe;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color: #1e40af;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        .question-info-icon {
+
+            font-size: 22px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* ==========================================
+           MESSAGE
+        ========================================== */
+
+        #message {
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            min-height: 20px;
+
+            color: #dc2626;
+        }
+
+
+        /* ==========================================
+           BUTTON
+        ========================================== */
+
+        .button-container {
+
+            margin-top: 30px;
+
+            display: flex;
+
+            justify-content: center;
+        }
+
+
+        .start-btn {
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #1d4ed8
+                );
+
+            color: white;
+
+            padding:
+                14px 35px;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            min-width: 220px;
+
+            box-shadow:
+                0 7px 18px
+                rgba(37, 99, 235, 0.25);
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .start-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 24px
+                rgba(37, 99, 235, 0.30);
+        }
+
+
+        .start-btn:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* ==========================================
+           FOOTER NOTE
+        ========================================== */
+
+        .security-note {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 700px) {
+
+            .header {
+
+                padding:
+                    16px 20px;
+            }
+
+
+            .brand {
+
+                font-size: 17px;
+            }
+
+
+            .back-btn {
+
+                padding:
+                    8px 12px;
+
+                font-size: 13px;
+            }
+
+
+            .page-container {
+
+                margin-top: 35px;
+
+                padding:
+                    0 15px;
+            }
+
+
+            .intro h1 {
+
+                font-size: 27px;
+            }
+
+
+            .intro p {
+
+                font-size: 14px;
+            }
+
+
+            .setup-card {
+
+                padding: 25px 20px;
+
+                border-radius: 16px;
+            }
+
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .form-group.full {
+
+                grid-column: auto;
+            }
+
+
+            .start-btn {
+
+                width: 100%;
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .header {
+
+                flex-direction: column;
+
+                gap: 12px;
+
+                align-items: flex-start;
+            }
+
+
+            .intro-icon {
+
+                width: 60px;
+
+                height: 60px;
+
+                font-size: 28px;
+            }
+
+
+            .intro h1 {
+
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <span class="brand-icon">
+                🎯
+            </span>
+
+            <span>
+                Virtual Interview Assistant
+            </span>
+
+        </div>
+
+
+        <a
+            href="/candidate-dashboard"
+            class="back-btn"
+        >
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         MAIN
+    ========================================== -->
+
+    <main class="page-container">
+
+
+        <!-- INTRO -->
+
+        <section class="intro">
+
+            <div class="intro-icon">
+                📝
+            </div>
+
+
+            <h1>
+                Set Up Your Interview
+            </h1>
+
+
+            <p>
+                Choose your preferred interview domain
+                and difficulty level to begin your
+                personalized practice interview.
+            </p>
+
+
+            <p
+                id="candidateName"
+                class="candidate-name"
+            ></p>
+
+        </section>
+
+
+
+        <!-- SETUP CARD -->
+
+        <section class="setup-card">
+
+
+            <div class="card-title">
+                Interview Configuration
+            </div>
+
+
+            <div class="card-subtitle">
+                Select the options below before starting
+                your interview session.
+            </div>
+
+
+
+            <form id="interviewForm">
+
+
+                <div class="form-grid">
+
+
+                    <!-- DOMAIN -->
+
+                    <div class="form-group">
+
+                        <label for="domain">
+
+                            <span class="label-icon">
+                                💻
+                            </span>
+
+                            Interview Domain
+
+                        </label>
+
+
+                        <select
+                            id="domain"
+                            required
+                        >
+
+                            <option value="">
+                                Select Domain
+                            </option>
+
+                            <option value="Python">
+                                Python
+                            </option>
+
+                            <option value="Java">
+                                Java
+                            </option>
+
+                            <option value="JavaScript">
+                                JavaScript
+                            </option>
+
+                            <option value="C">
+                                C
+                            </option>
+
+                            <option value="C++">
+                                C++
+                            </option>
+
+                            <option value="HTML">
+                                HTML
+                            </option>
+
+                            <option value="CSS">
+                                CSS
+                            </option>
+
+                            <option value="SQL">
+                                SQL
+                            </option>
+
+                            <option value="DBMS">
+                                DBMS
+                            </option>
+
+                            <option value="Data Structures">
+                                Data Structures
+                            </option>
+
+                            <option value="Algorithms">
+                                Algorithms
+                            </option>
+
+                            <option value="Data Science">
+                                Data Science
+                            </option>
+
+                            <option value="Data Analytics">
+                                Data Analytics
+                            </option>
+
+                            <option value="Machine Learning">
+                                Machine Learning
+                            </option>
+
+                            <option value="Artificial Intelligence">
+                                Artificial Intelligence
+                            </option>
+
+                            <option value="Computer Networks">
+                                Computer Networks
+                            </option>
+
+                            <option value="Operating System">
+                                Operating System
+                            </option>
+
+                            <option value="Cybersecurity">
+                                Cybersecurity
+                            </option>
+
+                            <option value="Cloud Computing">
+                                Cloud Computing
+                            </option>
+
+                            <option value="React">
+                                React
+                            </option>
+
+                            <option value="Node.js">
+                                Node.js
+                            </option>
+
+                            <option value="HR">
+                                HR
+                            </option>
+
+                            <option value="Behavioral">
+                                Behavioral
+                            </option>
+
+                            <option value="Communication">
+                                Communication
+                            </option>
+
+                        </select>
+
+
+                        <span class="helper-text">
+                            Select the technical or behavioral
+                            area you want to practice.
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- DIFFICULTY -->
+
+                    <div class="form-group">
+
+                        <label for="difficulty">
+
+                            <span class="label-icon">
+                                📈
+                            </span>
+
+                            Difficulty Level
+
+                        </label>
+
+
+                        <select
+                            id="difficulty"
+                            required
+                        >
+
+                            <option value="">
+                                Select Difficulty
+                            </option>
+
+                            <option value="Easy">
+                                Easy
+                            </option>
+
+                            <option value="Medium">
+                                Medium
+                            </option>
+
+                            <option value="Hard">
+                                Hard
+                            </option>
+
+                        </select>
+
+
+                        <span class="helper-text">
+                            Choose a difficulty that matches
+                            your current preparation level.
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- QUESTION COUNT -->
+
+                    <div class="form-group full">
+
+                        <label for="questionCount">
+
+                            <span class="label-icon">
+                                ❓
+                            </span>
+
+                            Number of Questions
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="questionCount"
+                            value=""
+                            min="1"
+                            max="100"
+                            readonly
+                        >
+
+
+                        <span class="helper-text">
+                            The number of questions is configured
+                            by the administrator.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- QUESTION INFO -->
+
+                <div class="question-info">
+
+                    <span class="question-info-icon">
+                        ℹ️
+                    </span>
+
+                    <span>
+                        Your interview will contain the number
+                        of questions configured by the admin.
+                        Answer each question carefully to get
+                        the most accurate performance score.
+                    </span>
+
+                </div>
+
+
+
+                <!-- MESSAGE -->
+
+                <p id="message"></p>
+
+
+
+                <!-- BUTTON -->
+
+                <div class="button-container">
+
+                    <button
+                        type="submit"
+                        class="start-btn"
+                    >
+                        🚀 Start Interview
+                    </button>
+
+                </div>
+
+            </form>
+
+
+        </section>
+
+
+
+        <!-- FOOTER NOTE -->
+
+        <p class="security-note">
+
+            🔒 Your interview preferences are stored
+            securely for this session.
+
+        </p>
+
+
+    </main>
+
+
+
+    <script>
+
+
+        // ==========================================
+        // GET USER DETAILS
+        // ==========================================
+
+        const userId =
+            localStorage.getItem("user_id");
+
+        const firstName =
+            localStorage.getItem("first_name");
+
+
+
+        // ==========================================
+        // CHECK LOGIN
+        // ==========================================
+
+        if (!userId) {
+
+            alert("Please login first.");
+
+            window.location.href =
+                "/login";
+
+        }
+
+
+
+        // ==========================================
+        // SHOW CANDIDATE NAME
+        // ==========================================
+
+        document.getElementById(
+            "candidateName"
+        ).textContent =
+            "Welcome, " +
+            (firstName || "Candidate") +
+            "! 👋";
+
+
+
+        // ==========================================
+        // LOAD ADMIN INTERVIEW SETTINGS
+        // ==========================================
+
+        async function loadInterviewSettings() {
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/interview-settings"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.message ||
+                        "Unable to load interview settings.";
+
+                    return;
+
+                }
+
+
+
+                // Get Admin question count
+
+                const questionCount =
+                    Number(
+                        data.question_count
+                    );
+
+
+
+                if (
+                    !questionCount ||
+                    questionCount <= 0
+                ) {
+
+                    message.textContent =
+                        "Invalid question count set by Admin.";
+
+                    return;
+
+                }
+
+
+
+                // Show Admin question count
+
+                document.getElementById(
+                    "questionCount"
+                ).value =
+                    questionCount;
+
+
+
+                // Save it in localStorage
+
+                localStorage.setItem(
+                    "interview_question_count",
+                    questionCount
+                );
+
+
+                console.log(
+                    "Admin question count:",
+                    questionCount
+                );
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Settings loading error:",
+                    error
+                );
+
+
+                message.textContent =
+                    "Unable to load interview settings.";
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // START INTERVIEW
+        // ==========================================
+
+        document
+            .getElementById("interviewForm")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+
+                    const domain =
+                        document.getElementById(
+                            "domain"
+                        ).value;
+
+
+
+                    const difficulty =
+                        document.getElementById(
+                            "difficulty"
+                        ).value;
+
+
+
+                    const questionCount =
+                        Number(
+                            document.getElementById(
+                                "questionCount"
+                            ).value
+                        );
+
+
+
+                    const message =
+                        document.getElementById(
+                            "message"
+                        );
+
+
+
+                    // ==========================================
+                    // VALIDATION
+                    // ==========================================
+
+                    if (!domain || !difficulty) {
+
+                        message.textContent =
+                            "Please select domain and difficulty.";
+
+                        return;
+
+                    }
+
+
+
+                    if (
+                        !questionCount ||
+                        questionCount <= 0
+                    ) {
+
+                        message.textContent =
+                            "Invalid question count.";
+
+                        return;
+
+                    }
+
+
+
+                    // ==========================================
+                    // SAVE INTERVIEW SETTINGS
+                    // ==========================================
+
+                    localStorage.setItem(
+                        "interview_domain",
+                        domain
+                    );
+
+
+                    localStorage.setItem(
+                        "interview_difficulty",
+                        difficulty
+                    );
+
+
+                    localStorage.setItem(
+                        "interview_question_count",
+                        questionCount
+                    );
+
+
+
+                    message.style.color =
+                        "#2563eb";
+
+
+                    message.textContent =
+                        "Starting interview...";
+
+
+
+                    // ==========================================
+                    // GO TO INTERVIEW SESSION
+                    // ==========================================
+
+                    setTimeout(function() {
+
+                        window.location.href =
+                            "/interview-session";
+
+                    }, 500);
+
+                }
+            );
+
+
+
+        // ==========================================
+        // LOAD SETTINGS WHEN PAGE OPENS
+        // ==========================================
+
+        loadInterviewSettings();
+
+    </script>
+
+
+</body>
+
+</html>

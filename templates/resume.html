@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Upload | Virtual Interview Assistant &amp; Evaluating System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #0f172a,
+                #1e3a8a
+            );
+
+            color: white;
+            padding: 22px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .candidate-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .intro h1 {
+            font-size: 32px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .upload-card {
+            background: white;
+            border-radius: 18px;
+            padding: 40px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(15, 23, 42, 0.08);
+        }
+
+        .upload-area {
+            border: 2px dashed #93c5fd;
+            border-radius: 15px;
+
+            padding: 45px 20px;
+
+            text-align: center;
+
+            background: #f8fbff;
+        }
+
+        .upload-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .upload-area h2 {
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .upload-area p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .choose-button {
+            display: inline-block;
+
+            background: #2563eb;
+            color: white;
+
+            padding: 12px 24px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .choose-button:hover {
+            background: #1d4ed8;
+        }
+
+        .file-name {
+            margin-top: 20px;
+
+            color: #334155;
+
+            font-size: 14px;
+
+            word-break: break-word;
+        }
+
+        .upload-button {
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #0f172a;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .upload-button:hover {
+            background: #1e293b;
+        }
+
+        .upload-button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 20px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            min-height: 20px;
+        }
+
+        .back-button {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 18px 5%;
+            }
+
+            .brand {
+                font-size: 18px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .intro h1 {
+                font-size: 26px;
+            }
+
+            .upload-card {
+                padding: 25px;
+            }
+
+            .upload-area {
+                padding: 35px 15px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="brand">
+            Virtual Interview Assistant
+        </div>
+
+        <div class="candidate-badge">
+            Candidate
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <div class="intro">
+
+            <h1>
+                Resume-Based Interview
+            </h1>
+
+            <p>
+                Upload your resume to get personalized
+                interview questions based on your
+                skills and experience.
+            </p>
+
+        </div>
+
+
+        <div class="upload-card">
+
+            <div class="upload-area">
+
+                <div class="upload-icon">
+                    📄
+                </div>
+
+                <h2>
+                    Upload Your Resume
+                </h2>
+
+                <p>
+                    Supported formats: PDF and DOCX
+                </p>
+
+
+                <label
+                    for="resumeFile"
+                    class="choose-button"
+                >
+                    Choose Resume
+                </label>
+
+
+                <input
+                    type="file"
+                    id="resumeFile"
+                    accept=".pdf,.docx"
+                >
+
+
+                <div
+                    id="fileName"
+                    class="file-name"
+                >
+                    No file selected
+                </div>
+
+            </div>
+
+
+            <button
+                id="uploadButton"
+                class="upload-button"
+                disabled
+            >
+                Upload Resume
+            </button>
+
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+
+            <a
+                href="/candidate-dashboard"
+                class="back-button"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const resumeFile =
+            document.getElementById("resumeFile");
+
+        const fileName =
+            document.getElementById("fileName");
+
+        const uploadButton =
+            document.getElementById("uploadButton");
+
+        const message =
+            document.getElementById("message");
+
+
+        resumeFile.addEventListener(
+            "change",
+            function () {
+
+                if (resumeFile.files.length > 0) {
+
+                    const file =
+                        resumeFile.files[0];
+
+                    fileName.textContent =
+                        file.name;
+
+                    uploadButton.disabled =
+                        false;
+
+                    message.textContent = "";
+
+                } else {
+
+                    fileName.textContent =
+                        "No file selected";
+
+                    uploadButton.disabled =
+                        true;
+                }
+
+            }
+        );
+
+
+        uploadButton.addEventListener(
+            "click",
+            async function () {
+
+                const file =
+                    resumeFile.files[0];
+
+                if (!file) {
+
+                    message.textContent =
+                        "Please select a resume.";
+
+                    return;
+                }
+
+
+                const userId =
+                    localStorage.getItem("user_id");
+
+
+                if (!userId) {
+
+                    message.textContent =
+                        "User session not found. Please login again.";
+
+                    message.style.color =
+                        "#dc2626";
+
+                    return;
+                }
+
+
+                const formData =
+                    new FormData();
+
+
+                formData.append(
+                    "resume",
+                    file
+                );
+
+
+                formData.append(
+                    "user_id",
+                    userId
+                );
+
+
+                uploadButton.disabled =
+                    true;
+
+
+                message.textContent =
+                    "Uploading resume...";
+
+                message.style.color =
+                    "#334155";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/upload-resume",
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (response.ok) {
+
+    message.textContent =
+        data.message ||
+        "Resume uploaded successfully.";
+
+    message.style.color =
+        "#15803d";
+
+    setTimeout(function () {
+
+        window.location.href =
+            "/resume-analysis?user_id=" +
+            encodeURIComponent(userId);
+
+    }, 800);
+
+
+
+                    } else {
+
+                        message.textContent =
+                            data.message ||
+                            "Resume upload failed.";
+
+                        message.style.color =
+                            "#dc2626";
+
+                        uploadButton.disabled =
+                            false;
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Resume upload error:",
+                        error
+                    );
+
+                    message.textContent =
+                        "Something went wrong while uploading the resume.";
+
+                    message.style.color =
+                        "#dc2626";
+
+                    uploadButton.disabled =
+                        false;
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

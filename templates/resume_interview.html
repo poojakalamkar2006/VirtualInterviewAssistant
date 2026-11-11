@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resume Interview | Virtual Interview Assistant &amp; Evaluating System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+            background: #f4f7fb;
+            color: #0f172a;
+        }
+
+        .header {
+            background: #0f2747;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .badge {
+            background: #2563eb;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 35px auto;
+        }
+
+        .top-card {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow:
+                0 10px 30px
+                rgba(15, 39, 71, 0.08);
+            margin-bottom: 22px;
+        }
+
+        .title {
+            margin: 0 0 8px;
+            color: #0f2747;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow:
+                0 10px 30px
+                rgba(15, 39, 71, 0.08);
+        }
+
+        .question-number {
+            color: #2563eb;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .question {
+            font-size: 23px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 170px;
+            resize: vertical;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .voice-btn {
+            background: #e0ecff;
+            color: #1d4ed8;
+        }
+
+        .next-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .finish-btn {
+            background: #0f2747;
+            color: white;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 15px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .progress {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #2563eb;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 16px 5%;
+            }
+
+            .container {
+                width: 92%;
+                margin-top: 22px;
+            }
+
+            .question {
+                font-size: 19px;
+            }
+
+            .top-card,
+            .question-card {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="brand">
+            Virtual Interview Assistant
+        </div>
+
+        <div class="badge">
+            Resume Interview
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <section class="top-card">
+
+            <h1 class="title">
+                Resume-Based Interview
+            </h1>
+
+            <p class="subtitle">
+                Answer questions based on the skills detected
+                from your resume.
+            </p>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    id="progressBar"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <section class="question-card">
+
+            <div
+                class="question-number"
+                id="questionNumber"
+            >
+                Loading question...
+            </div>
+
+            <div
+                class="question"
+                id="questionText"
+            >
+                Please wait...
+            </div>
+
+            <textarea
+                id="answer"
+                placeholder="Type your answer here..."
+            ></textarea>
+
+
+            <div class="buttons">
+
+                <button
+                    type="button"
+                    class="voice-btn"
+                    id="voiceButton"
+                >
+                    🎤 Voice Answer
+                </button>
+
+                <button
+                    type="button"
+                    class="next-btn"
+                    id="nextButton"
+                >
+                    Next Question
+                </button>
+
+                <button
+                    type="button"
+                    class="finish-btn"
+                    id="finishButton"
+                    style="display:none;"
+                >
+                    Finish Interview
+                </button>
+
+            </div>
+
+            <div
+                class="status"
+                id="status"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const userId =
+            new URLSearchParams(
+                window.location.search
+            ).get("user_id");
+
+        const difficulty =
+            new URLSearchParams(
+                window.location.search
+            ).get("difficulty");
+
+        const questionCount =
+            new URLSearchParams(
+                window.location.search
+            ).get("question_count");
+
+
+        let questions = [];
+
+        let answers = [];
+
+        let currentIndex = 0;
+
+
+        const questionNumber =
+            document.getElementById(
+                "questionNumber"
+            );
+
+        const questionText =
+            document.getElementById(
+                "questionText"
+            );
+
+        const answer =
+            document.getElementById(
+                "answer"
+            );
+
+        const nextButton =
+            document.getElementById(
+                "nextButton"
+            );
+
+        const finishButton =
+            document.getElementById(
+                "finishButton"
+            );
+
+        const voiceButton =
+            document.getElementById(
+                "voiceButton"
+            );
+
+        const status =
+            document.getElementById(
+                "status"
+            );
+
+        const progressBar =
+            document.getElementById(
+                "progressBar"
+            );
+
+
+        // ==========================================
+        // LOAD RESUME QUESTIONS
+        // ==========================================
+
+        async function loadQuestions() {
+
+            if (
+                !userId ||
+                !difficulty ||
+                !questionCount
+            ) {
+
+                status.textContent =
+                    "Invalid interview settings.";
+
+                return;
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/resume-questions",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                user_id: userId,
+                                difficulty: difficulty,
+                                count: questionCount
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    status.textContent =
+                        data.message ||
+                        "Could not load questions.";
+
+                    return;
+                }
+
+
+                questions =
+                    data.questions || [];
+
+
+                if (!questions.length) {
+
+                    status.textContent =
+                        "No questions available.";
+
+                    return;
+                }
+
+
+                showQuestion();
+
+            } catch (error) {
+
+                console.error(error);
+
+                status.textContent =
+                    "Unable to connect to the server.";
+
+            }
+
+        }
+
+
+        // ==========================================
+        // SHOW QUESTION
+        // ==========================================
+
+        function showQuestion() {
+
+            const question =
+                questions[currentIndex];
+
+
+            questionNumber.textContent =
+                "Question " +
+                (currentIndex + 1) +
+                " of " +
+                questions.length;
+
+
+            questionText.textContent =
+                question;
+
+
+            answer.value = "";
+
+            answer.focus();
+
+
+            const progress =
+                (
+                    (currentIndex + 1) /
+                    questions.length
+                ) * 100;
+
+
+            progressBar.style.width =
+                progress + "%";
+
+
+            if (
+                currentIndex ===
+                questions.length - 1
+            ) {
+
+                nextButton.style.display =
+                    "none";
+
+                finishButton.style.display =
+                    "inline-block";
+
+            } else {
+
+                nextButton.style.display =
+                    "inline-block";
+
+                finishButton.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        // ==========================================
+        // NEXT QUESTION
+        // ==========================================
+
+        nextButton.addEventListener(
+    "click",
+    function() {
+
+        answers[currentIndex] =
+            answer.value.trim();
+
+        currentIndex++;
+
+        showQuestion();
+
+    }
+);
+
+        
+
+
+// ==========================================
+// FINISH INTERVIEW
+// ==========================================
+
+finishButton.addEventListener(
+    "click",
+    async function() {
+
+        answers[currentIndex] =
+            answer.value.trim();
+
+        status.textContent =
+            "Evaluating your answers...";
+
+        finishButton.disabled = true;
+
+        try {
+
+            const response =
+                await fetch(
+                    "/resume-evaluate",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            user_id:
+                                userId,
+
+                            difficulty:
+                                difficulty,
+
+                            questions:
+                                questions,
+
+                            answers:
+                                answers
+
+                        })
+                    }
+                );
+
+            const data =
+                await response.json();
+
+            if (!response.ok) {
+
+                status.textContent =
+                    data.message ||
+                    "Evaluation failed.";
+
+                finishButton.disabled =
+                    false;
+
+                return;
+            }
+
+            // Save result temporarily
+            localStorage.setItem(
+                "resume_interview_result",
+                JSON.stringify(data)
+            );
+
+            // Go to result page
+            window.location.href =
+                "/resume-result?user_id=" +
+                encodeURIComponent(userId);
+
+        } catch (error) {
+
+            console.error(error);
+
+            status.textContent =
+                "Could not submit the interview.";
+
+            finishButton.disabled =
+                false;
+        }
+
+    }
+);
+        
+
+
+        // ==========================================
+        // VOICE ANSWER
+        // ==========================================
+
+        voiceButton.addEventListener(
+            "click",
+            function() {
+
+                const SpeechRecognition =
+                    window.SpeechRecognition ||
+                    window.webkitSpeechRecognition;
+
+
+                if (!SpeechRecognition) {
+
+                    status.textContent =
+                        "Voice input is not supported in this browser.";
+
+                    return;
+                }
+
+
+                const recognition =
+                    new SpeechRecognition();
+
+
+                recognition.lang = "en-US";
+
+                recognition.interimResults =
+                    false;
+
+                recognition.continuous =
+                    false;
+
+
+                status.textContent =
+                    "Listening...";
+
+
+                recognition.start();
+
+
+                recognition.onresult =
+                    function(event) {
+
+                        const spokenText =
+                            event.results[0][0].transcript;
+
+
+                        answer.value =
+                            spokenText;
+
+
+                        status.textContent =
+                            "Voice answer captured.";
+
+                    };
+
+
+                recognition.onerror =
+                    function() {
+
+                        status.textContent =
+                            "Could not capture voice answer.";
+
+                    };
+
+            }
+        );
+
+
+        // ==========================================
+        // START
+        // ==========================================
+
+        loadQuestions();
+
+    </script>
+
+</body>
+
+</html>

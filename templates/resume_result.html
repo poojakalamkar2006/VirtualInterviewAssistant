@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resume Interview Result | Virtual Interview Assistant &amp; Evaluating System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .badge {
+            background: #2563eb;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 45px auto;
+        }
+
+        .title-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title-section h1 {
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .title-section p {
+            color: #64748b;
+        }
+
+        /* SCORE */
+
+        .score-card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .score {
+            font-size: 60px;
+            font-weight: 800;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .score-label {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* INFO */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+            text-align: center;
+        }
+
+        .info-card h3 {
+            margin: 0 0 8px;
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .info-card p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* FEEDBACK */
+
+        .feedback-card {
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+            margin-bottom: 30px;
+        }
+
+        .feedback-card h2 {
+            margin-top: 0;
+            color: #0f172a;
+        }
+
+        .feedback-card p {
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .secondary {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 16px 5%;
+            }
+
+            .brand {
+                font-size: 18px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .score {
+                font-size: 48px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+            Virtual Interview Assistant
+        </div>
+
+        <div class="badge">
+            Resume Result
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <section class="title-section">
+
+            <h1>
+                Resume Interview Completed
+            </h1>
+
+            <p>
+                Here is your performance summary.
+            </p>
+
+        </section>
+
+
+        <!-- SCORE -->
+
+        <section class="score-card">
+
+            <div class="score">
+                {{ result["total_score"] }}%
+            </div>
+
+            <div class="score-label">
+                Overall Score
+            </div>
+
+        </section>
+
+
+        <!-- INFORMATION -->
+
+        <section class="info-grid">
+
+
+            <div class="info-card">
+
+                <h3>
+                    Interview Type
+                </h3>
+
+                <p>
+                    Resume-Based
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>
+                    Difficulty
+                </h3>
+
+                <p>
+                    {{ result["difficulty"] }}
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>
+                    Questions
+                </h3>
+
+                <p>
+                    {{ result["total_questions"] }}
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- FEEDBACK -->
+
+        <section class="feedback-card">
+
+            <h2>
+                Performance Feedback
+            </h2>
+
+            <p>
+                {{ result["feedback"] }}
+            </p>
+
+        </section>
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+            <a
+                href="/resume-interview-settings?user_id={{ result['user_id'] }}"
+                class="btn primary"
+            >
+                Resume Interview Again
+            </a>
+
+
+            <a
+                href="/candidate-dashboard"
+                class="btn secondary"
+            >
+                Back to Dashboard
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+</body>
+
+</html>

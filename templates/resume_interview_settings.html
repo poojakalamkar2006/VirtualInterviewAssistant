@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resume Interview Setting | Virtual Interview Assistant &amp; Evaluating System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #0f172a,
+                #1e3a8a
+            );
+
+            color: white;
+
+            padding: 22px 7%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 50px auto;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .intro h1 {
+            font-size: 32px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(15, 23, 42, 0.08);
+        }
+
+        .resume-info {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 30px;
+        }
+
+        .resume-info strong {
+            color: #1e40af;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+
+            font-size: 15px;
+            background: white;
+            color: #1e293b;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .start-button {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .start-button:hover {
+            background: #1d4ed8;
+        }
+
+        .back-button {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 18px 5%;
+            }
+
+            .brand {
+                font-size: 18px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .intro h1 {
+                font-size: 26px;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="brand">
+        Virtual Interview Assistant
+    </div>
+
+    <div class="badge">
+        Resume Interview
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+    <div class="intro">
+
+        <h1>
+            Resume Interview Settings
+        </h1>
+
+        <p>
+            Choose how you want your resume-based
+            interview to be conducted.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+
+        <div class="resume-info">
+
+            <p>
+                <strong>Resume:</strong>
+                {{ resume["file_name"] }}
+            </p>
+
+            <br>
+
+            <p>
+                Your interview questions will be
+                selected from the existing question
+                bank based on your resume skills.
+            </p>
+
+        </div>
+
+
+        <form id="resumeSettingsForm">
+
+
+            <div class="form-group">
+
+                <label for="difficulty">
+                    Difficulty
+                </label>
+
+                <select
+                    id="difficulty"
+                    required
+                >
+
+                    <option value="Easy">
+                        Easy
+                    </option>
+
+                    <option
+                        value="Medium"
+                        selected
+                    >
+                        Medium
+                    </option>
+
+                    <option value="Hard">
+                        Hard
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+    <label for="questionCount">
+        Number of Questions
+    </label>
+
+    <input
+        type="number"
+        id="questionCount"
+        min="5"
+        max="30"
+        value="10"
+        required
+    >
+
+    <small style="
+        display: block;
+        margin-top: 8px;
+        color: #64748b;
+    ">
+        Choose between 5 and 30 questions.
+    </small>
+
+</div>
+
+
+            <button
+                type="submit"
+                class="start-button"
+            >
+                Start Resume Interview
+            </button>
+
+
+        </form>
+
+
+        <a
+            href="/candidate-dashboard"
+            class="back-button"
+        >
+            ← Back to Dashboard
+        </a>
+
+
+    </div>
+
+
+</main>
+
+
+<script>
+
+    const form =
+        document.getElementById(
+            "resumeSettingsForm"
+        );
+
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const userId =
+                localStorage.getItem(
+                    "user_id"
+                );
+
+
+            if (!userId) {
+
+                alert(
+                    "User session not found. Please login again."
+                );
+
+                return;
+            }
+
+
+            const difficulty =
+                document.getElementById(
+                    "difficulty"
+                ).value;
+
+
+            const questionCount =
+                document.getElementById(
+                    "questionCount"
+                ).value;
+
+
+            localStorage.setItem(
+                "resume_interview_difficulty",
+                difficulty
+            );
+
+
+            localStorage.setItem(
+                "resume_interview_question_count",
+                questionCount
+            );
+
+
+           window.location.href =
+    "/resume-interview?user_id=" +
+    encodeURIComponent(userId) +
+    "&difficulty=" +
+    encodeURIComponent(difficulty) +
+    "&question_count=" +
+    encodeURIComponent(questionCount);
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | Virtual Interview Assistant &amp; Evaluating System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef2ff 0%,
+                    #f8fafc 50%,
+                    #e0f2fe 100%
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            max-width: 1050px;
+
+            min-height: 620px;
+
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 60px rgba(15, 23, 42, 0.12);
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* ==========================================
+           LEFT SIDE
+           ========================================== */
+
+        .left-section {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111827,
+                    #1e3a8a
+                );
+
+            color: white;
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .left-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            top: -100px;
+            right: -100px;
+        }
+
+        .left-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.05);
+
+            bottom: -100px;
+            left: -80px;
+        }
+
+        .brand {
+
+            position: relative;
+
+            z-index: 1;
+
+            margin-bottom: 45px;
+        }
+
+        .brand-icon {
+
+            width: 58px;
+            height: 58px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            border: 1px solid
+                rgba(255, 255, 255, 0.18);
+
+            border-radius: 16px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+
+            margin-bottom: 22px;
+        }
+
+        .brand h1 {
+
+            font-size: 30px;
+
+            line-height: 1.2;
+
+            margin-bottom: 14px;
+
+            letter-spacing: -0.5px;
+        }
+
+        .brand p {
+
+            color: #cbd5e1;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            max-width: 390px;
+        }
+
+        .features {
+
+            position: relative;
+
+            z-index: 1;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+        .feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            color: #e2e8f0;
+
+            font-size: 14px;
+        }
+
+        .feature-icon {
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 10px;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 16px;
+        }
+
+        /* ==========================================
+           RIGHT SIDE
+           ========================================== */
+
+        .right-section {
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+        .login-header {
+
+            margin-bottom: 32px;
+        }
+
+        .login-header h2 {
+
+            color: #111827;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           FORM
+           ========================================== */
+
+        .form-group {
+
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+
+            display: block;
+
+            color: #334155;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 16px;
+
+            color: #94a3b8;
+        }
+
+        .input-wrapper input {
+
+            width: 100%;
+
+            height: 50px;
+
+            border: 1px solid #dbe2ea;
+
+            border-radius: 11px;
+
+            padding:
+                0 15px 0 44px;
+
+            font-size: 14px;
+
+            color: #1e293b;
+
+            background: #f8fafc;
+
+            outline: none;
+
+            transition: all 0.2s ease;
+        }
+
+        .input-wrapper input::placeholder {
+
+            color: #94a3b8;
+        }
+
+        .input-wrapper input:focus {
+
+            border-color: #2563eb;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(37, 99, 235, 0.10);
+        }
+
+        /* ==========================================
+           LOGIN BUTTON
+           ========================================== */
+
+        .login-button {
+
+            width: 100%;
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #1d4ed8
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+
+            margin-top: 4px;
+        }
+
+        .login-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 10px 22px
+                rgba(37, 99, 235, 0.22);
+        }
+
+        .login-button:active {
+
+            transform: translateY(0);
+        }
+
+        /* ==========================================
+           MESSAGE
+           ========================================== */
+
+        #message {
+
+            min-height: 22px;
+
+            margin-top: 15px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: 500;
+        }
+
+        /* ==========================================
+           LINKS
+           ========================================== */
+
+        .links {
+
+            margin-top: 28px;
+
+            padding-top: 24px;
+
+            border-top: 1px solid #e5e7eb;
+
+            text-align: center;
+        }
+
+        .links p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-bottom: 15px;
+        }
+
+        .links a {
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        .links a:hover {
+
+            text-decoration: underline;
+        }
+
+        .admin-link {
+
+            margin-top: 12px;
+        }
+
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .page-wrapper {
+
+                grid-template-columns: 1fr;
+
+                min-height: auto;
+            }
+
+            .left-section {
+
+                padding: 40px 30px;
+
+                text-align: center;
+            }
+
+            .brand-icon {
+
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .brand p {
+
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .features {
+
+                align-items: flex-start;
+
+                max-width: 280px;
+
+                margin: 0 auto;
+
+                text-align: left;
+            }
+
+            .right-section {
+
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .left-section {
+
+                padding: 32px 22px;
+            }
+
+            .right-section {
+
+                padding: 32px 22px;
+            }
+
+            .brand h1 {
+
+                font-size: 25px;
+            }
+
+            .login-header h2 {
+
+                font-size: 26px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- ==========================================
+             LEFT SECTION
+             ========================================== -->
+
+        <section class="left-section">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🎯
+                </div>
+
+                <h1>
+    Virtual Interview Assistant
+    &amp; Evaluating System
+</h1>
+
+                <p>
+                    Prepare smarter, practice confidently,
+                    and improve your interview performance
+                    with your personal interview assistant.
+                </p>
+
+            </div>
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🎤
+                    </div>
+
+                    <span>
+                        Voice-enabled interview practice
+                    </span>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        📊
+                    </div>
+
+                    <span>
+                        Track your interview performance
+                    </span>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🎯
+                    </div>
+
+                    <span>
+                        Practice questions by difficulty
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             RIGHT SECTION
+             ========================================== -->
+
+        <section class="right-section">
+
+            <div class="login-header">
+
+                <h2>
+                    Welcome back 👋
+                </h2>
+
+                <p>
+                    Sign in to continue your interview
+                    preparation journey.
+                </p>
+
+            </div>
+
+
+            <form id="loginForm">
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Sign In
+                </button>
+
+            </form>
+
+
+            <p id="message"></p>
+
+
+            <!-- LINKS -->
+
+            <div class="links">
+
+                <p>
+                    Don't have an account?
+                    <a href="/register">
+                        Create an account
+                    </a>
+                </p>
+
+                <p class="admin-link">
+
+                    Are you an Administrator?
+
+                    <a href="/admin-login">
+                        Admin Login
+                    </a>
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- ==========================================
+         LOGIN JAVASCRIPT
+         ========================================== -->
+
+    <script>
+
+        document
+            .getElementById("loginForm")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    const email =
+                        document.getElementById(
+                            "email"
+                        ).value;
+
+                    const password =
+                        document.getElementById(
+                            "password"
+                        ).value;
+
+                    const message =
+                        document.getElementById(
+                            "message"
+                        );
+
+
+                    message.textContent = "";
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                "/login",
+                                {
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body:
+                                        JSON.stringify({
+                                            email: email,
+                                            password: password
+                                        })
+                                }
+                            );
+
+
+                        const data =
+                            await response.json();
+
+
+                        if (!response.ok) {
+
+                            message.textContent =
+                                data.message;
+
+                            message.style.color =
+                                "#dc2626";
+
+                            return;
+                        }
+
+
+                        localStorage.setItem(
+                            "user_id",
+                            data.user_id
+                        );
+
+                        localStorage.setItem(
+                            "first_name",
+                            data.first_name
+                        );
+
+                        localStorage.setItem(
+                            "last_name",
+                            data.last_name
+                        );
+
+                        localStorage.setItem(
+                            "email",
+                            data.email
+                        );
+
+
+                        message.textContent =
+                            "Login successful!";
+
+                        message.style.color =
+                            "#16a34a";
+
+
+                        setTimeout(
+                            function() {
+
+                                window.location.href =
+                                    "/candidate-dashboard";
+
+                            },
+                            500
+                        );
+
+
+                    } catch (error) {
+
+                        message.textContent =
+                            "Unable to connect to the server.";
+
+                        message.style.color =
+                            "#dc2626";
+
+                        console.error(error);
+
+                    }
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>

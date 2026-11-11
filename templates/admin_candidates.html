@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Candidates | Virtual Interview Assistant &amp; Evaluating System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(
+                135deg,
+                #f1f5f9,
+                #e0e7ff
+            );
+            min-height: 100vh;
+            color: #1e293b;
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #1e3a8a
+            );
+            color: white;
+            padding: 22px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.18);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+        }
+
+        .brand-text h2 {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+
+        .brand-text p {
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+
+        .admin-badge {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+
+        /* ==============================
+           PAGE
+        ============================== */
+
+        .page {
+            max-width: 1150px;
+            margin: 45px auto;
+            padding: 0 22px;
+        }
+
+
+        /* ==============================
+           PAGE HEADER
+        ============================== */
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header .icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 15px;
+            background: #dbeafe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 {
+            font-size: 30px;
+            color: #0f172a;
+            margin-bottom: 7px;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+
+        /* ==============================
+           CANDIDATE CARD
+        ============================== */
+
+        .candidate-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.10);
+        }
+
+
+        /* ==============================
+           CARD HEADER
+        ============================== */
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title span {
+            font-size: 20px;
+        }
+
+        .card-title h2 {
+            font-size: 18px;
+            color: #1e293b;
+        }
+
+        .candidate-count {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+
+        /* ==============================
+           TABLE
+        ============================== */
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 15px 14px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 16px 14px;
+            border-bottom: 1px solid #eef2f7;
+            color: #475569;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        /* ==============================
+           ID
+        ============================== */
+
+        .candidate-id {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 34px;
+            height: 30px;
+            padding: 0 8px;
+            background: #f1f5f9;
+            color: #475569;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        /* ==============================
+           NAME
+        ============================== */
+
+        .candidate-name {
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+
+        /* ==============================
+           EMAIL
+        ============================== */
+
+        .email {
+            color: #64748b;
+        }
+
+
+        /* ==============================
+           AVATAR
+        ============================== */
+
+        .candidate-info {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+
+        /* ==============================
+           CLEAR HISTORY BUTTON
+        ============================== */
+
+        .delete-button {
+            border: none;
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            padding: 9px 13px;
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease,
+                        color 0.2s ease,
+                        transform 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .delete-button:hover {
+            background: #dc2626;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+
+        /* ==============================
+           EMPTY STATE
+        ============================== */
+
+        .empty {
+            text-align: center;
+            padding: 65px 20px;
+            border: 1px dashed #cbd5e1;
+            border-radius: 14px;
+            background: #f8fafc;
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 15px;
+            border-radius: 18px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .empty h3 {
+            color: #334155;
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+        .empty p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+
+        /* ==============================
+           BACK BUTTON
+        ============================== */
+
+        .back-area {
+            margin-top: 25px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 11px 18px;
+            background: #1e293b;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s ease,
+                        transform 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: #0f172a;
+            transform: translateY(-1px);
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 18px 20px;
+            }
+
+            .brand-text h2 {
+                font-size: 17px;
+            }
+
+            .brand-text p {
+                font-size: 12px;
+            }
+
+            .admin-badge {
+                display: none;
+            }
+
+            .page {
+                margin: 30px auto;
+                padding: 0 15px;
+            }
+
+            .page-header h1 {
+                font-size: 25px;
+            }
+
+            .candidate-card {
+                padding: 20px;
+                border-radius: 16px;
+            }
+
+            .card-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .candidate-count {
+                align-self: flex-start;
+            }
+
+            .table-wrapper {
+                border-radius: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         HEADER
+    ============================== -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                👥
+            </div>
+
+            <div class="brand-text">
+
+                <h2>
+                    Virtual Interview Assistant
+                </h2>
+
+                <p>
+                    Interview Administration Panel
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-badge">
+            Administrator
+        </div>
+
+    </header>
+
+
+
+    <!-- ==============================
+         PAGE
+    ============================== -->
+
+    <main class="page">
+
+
+        <div class="page-header">
+
+            <div class="icon">
+                👥
+            </div>
+
+            <h1>
+                Registered Candidates
+            </h1>
+
+            <p>
+                Manage registered candidates and their interview history.
+            </p>
+
+        </div>
+
+
+
+        <!-- ==============================
+             CANDIDATE CARD
+        ============================== -->
+
+        <div class="candidate-card">
+
+
+            <div class="card-header">
+
+                <div class="card-title">
+
+                    <span>👤</span>
+
+                    <h2>
+                        Candidate Management
+                    </h2>
+
+                </div>
+
+
+                {% if candidates %}
+
+                <div class="candidate-count">
+
+                    {{ candidates|length }}
+                    Candidate{% if candidates|length != 1 %}s{% endif %}
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+
+
+            {% if candidates %}
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Candidate
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for candidate in candidates %}
+
+                        <tr>
+
+
+                            <!-- ID -->
+
+                            <td>
+
+                                <span class="candidate-id">
+
+                                    #{{ candidate["id"] }}
+
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- CANDIDATE -->
+
+                            <td>
+
+                                <div class="candidate-info">
+
+                                    <div class="avatar">
+
+                                        {{ candidate["first_name"][0] | upper }}
+
+                                    </div>
+
+                                    <div class="candidate-name">
+
+                                        {{ candidate["first_name"] }}
+                                        {{ candidate["last_name"] }}
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+
+                            <!-- EMAIL -->
+
+                            <td>
+
+                                <span class="email">
+
+                                    {{ candidate["email"] }}
+
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- ACTION -->
+
+                            <td>
+
+                                <form
+                                    action="/admin-delete-user-history/{{ candidate['id'] }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Are you sure you want to clear this candidate history?');"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="delete-button"
+                                    >
+                                        🗑 Clear History
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- EMPTY STATE -->
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    👥
+                </div>
+
+                <h3>
+                    No Candidates Registered
+                </h3>
+
+                <p>
+                    Registered candidates will appear here
+                    once they create an account.
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+
+
+            <!-- BACK BUTTON -->
+
+            <div class="back-area">
+
+                <a
+                    href="/admin-dashboard"
+                    class="back-button"
+                >
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

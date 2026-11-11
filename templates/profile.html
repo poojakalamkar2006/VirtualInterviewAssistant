@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Candidate Login | Virtual Interview Assistant &amp; Evaluating System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1f5f9,
+                    #eef2ff
+                );
+
+            color: #1e293b;
+        }
+
+        /* ==========================================
+           HEADER
+           ========================================== */
+
+        .header {
+
+            height: 74px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e3a8a
+                );
+
+            color: white;
+
+            padding: 0 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow:
+                0 4px 20px
+                rgba(15, 23, 42, 0.15);
+        }
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .brand-icon {
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+        .brand-name {
+
+            font-size: 18px;
+
+            font-weight: 700;
+        }
+
+        .back-button {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            padding: 9px 16px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255, 255, 255, 0.10);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.18);
+
+            transition: all 0.2s ease;
+        }
+
+        .back-button:hover {
+
+            background:
+                rgba(255, 255, 255, 0.18);
+        }
+
+        /* ==========================================
+           PAGE
+           ========================================== */
+
+        .page {
+
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            padding:
+                40px 25px 60px;
+        }
+
+        /* ==========================================
+           PAGE INTRO
+           ========================================== */
+
+        .intro {
+
+            margin-bottom: 25px;
+        }
+
+        .intro h1 {
+
+            color: #0f172a;
+
+            font-size: 28px;
+
+            margin-bottom: 8px;
+
+            letter-spacing: -0.4px;
+        }
+
+        .intro p {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           PROFILE CARD
+           ========================================== */
+
+        .profile-card {
+
+            background: white;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(15, 23, 42, 0.06);
+        }
+
+        .card-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding-bottom: 22px;
+
+            margin-bottom: 25px;
+
+            border-bottom:
+                1px solid #e2e8f0;
+        }
+
+        .card-icon {
+
+            width: 44px;
+            height: 44px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dbeafe,
+                    #e0e7ff
+                );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+        }
+
+        .card-header h2 {
+
+            color: #0f172a;
+
+            font-size: 19px;
+        }
+
+        .card-header p {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-top: 3px;
+        }
+
+        /* ==========================================
+           FORM
+           ========================================== */
+
+        .form-group {
+
+            margin-bottom: 23px;
+        }
+
+        .form-group label {
+
+            display: block;
+
+            color: #334155;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 17px;
+
+            font-size: 16px;
+
+            color: #94a3b8;
+        }
+
+        input,
+        textarea,
+        select {
+
+            width: 100%;
+
+            border:
+                1px solid #dbe2ea;
+
+            border-radius: 11px;
+
+            background: #f8fafc;
+
+            color: #1e293b;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        input {
+
+            height: 50px;
+
+            padding:
+                0 15px 0 44px;
+        }
+
+        textarea {
+
+            min-height: 105px;
+
+            padding: 14px 15px 14px 44px;
+
+            resize: vertical;
+
+            line-height: 1.5;
+        }
+
+        select {
+
+            height: 50px;
+
+            padding:
+                0 40px 0 44px;
+
+            cursor: pointer;
+
+            appearance: none;
+
+            background-image:
+                linear-gradient(45deg, transparent 50%, #64748b 50%),
+                linear-gradient(135deg, #64748b 50%, transparent 50%);
+
+            background-position:
+                calc(100% - 18px) 21px,
+                calc(100% - 13px) 21px;
+
+            background-size:
+                5px 5px,
+                5px 5px;
+
+            background-repeat: no-repeat;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+
+            color: #94a3b8;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+
+            border-color: #2563eb;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(37, 99, 235, 0.10);
+        }
+
+        .field-hint {
+
+            margin-top: 6px;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+        }
+
+        /* ==========================================
+           TWO COLUMN ROW
+           ========================================== */
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px;
+        }
+
+        /* ==========================================
+           BUTTON
+           ========================================== */
+
+        .button-area {
+
+            padding-top: 5px;
+
+            border-top:
+                1px solid #e2e8f0;
+
+            margin-top: 5px;
+
+            display: flex;
+
+            justify-content: flex-end;
+        }
+
+        .save-button {
+
+            border: none;
+
+            min-width: 180px;
+
+            height: 50px;
+
+            padding: 0 25px;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #1d4ed8
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 7px 16px
+                rgba(37, 99, 235, 0.18);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .save-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 10px 22px
+                rgba(37, 99, 235, 0.25);
+        }
+
+        .save-button:active {
+
+            transform: translateY(0);
+        }
+
+        /* ==========================================
+           MESSAGE
+           ========================================== */
+
+        #message {
+
+            min-height: 22px;
+
+            margin-top: 15px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        /* ==========================================
+           INFO BOX
+           ========================================== */
+
+        .info-box {
+
+            margin-top: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #eef2ff
+                );
+
+            border:
+                1px solid #dbeafe;
+
+            border-radius: 13px;
+
+            padding: 15px 17px;
+
+            color: #475569;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        .info-box strong {
+
+            color: #1e3a8a;
+        }
+
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
+
+        @media (max-width: 700px) {
+
+            .header {
+
+                padding: 0 20px;
+            }
+
+            .brand-name {
+
+                font-size: 15px;
+            }
+
+            .page {
+
+                padding:
+                    30px 18px 45px;
+            }
+
+            .profile-card {
+
+                padding: 25px 20px;
+            }
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+                gap: 0;
+            }
+
+            .button-area {
+
+                display: block;
+            }
+
+            .save-button {
+
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .back-button {
+
+                padding: 8px 11px;
+
+                font-size: 12px;
+            }
+
+            .brand-icon {
+
+                width: 36px;
+                height: 36px;
+
+                font-size: 17px;
+            }
+
+            .intro h1 {
+
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+     ========================================== -->
+
+<header class="header">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🎯
+        </div>
+
+        <div class="brand-name">
+            Virtual Interview Assistant
+        </div>
+
+    </div>
+
+
+    <a
+        href="/candidate-dashboard"
+        class="back-button">
+
+        ← Dashboard
+
+    </a>
+
+</header>
+
+
+<!-- ==========================================
+     PAGE CONTENT
+     ========================================== -->
+
+<main class="page">
+
+
+    <div class="intro">
+
+        <h1>
+            Candidate Profile
+        </h1>
+
+        <p>
+            Tell us about yourself so we can prepare
+            your interview experience.
+        </p>
+
+    </div>
+
+
+    <!-- ==========================================
+         PROFILE CARD
+         ========================================== -->
+
+    <section class="profile-card">
+
+
+        <div class="card-header">
+
+            <div class="card-icon">
+                👤
+            </div>
+
+            <div>
+
+                <h2>
+                    Your Information
+                </h2>
+
+                <p>
+                    Complete your profile before starting
+                    an interview.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="profileForm">
+
+
+            <!-- ======================================
+                 EDUCATION
+                 ====================================== -->
+
+            <div class="form-group">
+
+                <label for="education">
+                    Education
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        🎓
+                    </span>
+
+                    <input
+                        type="text"
+                        id="education"
+                        placeholder="Example: B.Tech Computer Engineering"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ======================================
+                 SKILLS
+                 ====================================== -->
+
+            <div class="form-group">
+
+                <label for="skills">
+                    Skills
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        💻
+                    </span>
+
+                    <textarea
+                        id="skills"
+                        rows="4"
+                        placeholder="Example: Python, Java, SQL, HTML"
+                        required
+                    ></textarea>
+
+                </div>
+
+                <div class="field-hint">
+                    Separate multiple skills with commas.
+                </div>
+
+            </div>
+
+
+            <!-- ======================================
+                 EXPERIENCE
+                 ====================================== -->
+
+            <div class="form-group">
+
+                <label for="experience">
+                    Experience
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        💼
+                    </span>
+
+                    <textarea
+                        id="experience"
+                        rows="4"
+                        placeholder="Example: Fresher / 1 year experience"
+                        required
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <!-- ======================================
+                 DOMAIN
+                 ====================================== -->
+
+            <div class="form-group">
+
+                <label for="domain">
+                    Preferred Interview Domain
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        🎯
+                    </span>
+
+                    <select
+                        id="domain"
+                        required
+                    >
+
+                        <option value="">
+                            Select your preferred domain
+                        </option>
+
+                        <option value="Python">
+                            Python
+                        </option>
+
+                        <option value="Java">
+                            Java
+                        </option>
+
+                        <option value="JavaScript">
+                            JavaScript
+                        </option>
+
+                        <option value="C">
+                            C
+                        </option>
+
+                        <option value="C++">
+                            C++
+                        </option>
+
+                        <option value="HTML">
+                            HTML
+                        </option>
+
+                        <option value="CSS">
+                            CSS
+                        </option>
+
+                        <option value="SQL">
+                            SQL
+                        </option>
+
+                        <option value="DBMS">
+                            DBMS
+                        </option>
+
+                        <option value="Data Structures">
+                            Data Structures
+                        </option>
+
+                        <option value="Algorithms">
+                            Algorithms
+                        </option>
+
+                        <option value="Data Science">
+                            Data Science
+                        </option>
+
+                        <option value="Data Analytics">
+                            Data Analytics
+                        </option>
+
+                        <option value="Machine Learning">
+                            Machine Learning
+                        </option>
+
+                        <option value="Artificial Intelligence">
+                            Artificial Intelligence
+                        </option>
+
+                        <option value="Computer Networks">
+                            Computer Networks
+                        </option>
+
+                        <option value="Operating System">
+                            Operating System
+                        </option>
+
+                        <option value="Cybersecurity">
+                            Cybersecurity
+                        </option>
+
+                        <option value="Cloud Computing">
+                            Cloud Computing
+                        </option>
+
+                        <option value="React">
+                            React
+                        </option>
+
+                        <option value="Node.js">
+                            Node.js
+                        </option>
+
+                        <option value="HR">
+                            HR
+                        </option>
+
+                        <option value="Behavioral">
+                            Behavioral
+                        </option>
+
+                        <option value="Communication">
+                            Communication
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- ======================================
+                 SAVE
+                 ====================================== -->
+
+            <div class="button-area">
+
+                <button
+                    type="submit"
+                    class="save-button">
+
+                    💾 Save & Continue
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+        <p id="message"></p>
+
+
+        <div class="info-box">
+
+            <strong>💡 Tip:</strong>
+            Choose the domain you are most interested
+            in practicing. Your interview questions will
+            be selected according to your chosen domain.
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- ==========================================
+     JAVASCRIPT
+     ========================================== -->
+
+<script>
+
+
+const userId =
+    localStorage.getItem("user_id");
+
+
+/* ==========================================
+   LOGIN CHECK
+   ========================================== */
+
+if (!userId) {
+
+    alert("Please login first.");
+
+    window.location.href =
+        "/login";
+
+}
+
+
+/* ==========================================
+   PROFILE FORM
+   ========================================== */
+
+document
+    .getElementById("profileForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const education =
+                document.getElementById(
+                    "education"
+                ).value;
+
+
+            const skills =
+                document.getElementById(
+                    "skills"
+                ).value;
+
+
+            const experience =
+                document.getElementById(
+                    "experience"
+                ).value;
+
+
+            const domain =
+                document.getElementById(
+                    "domain"
+                ).value;
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+
+            message.textContent = "";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/profile",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    user_id:
+                                        Number(userId),
+
+                                    education:
+                                        education,
+
+                                    skills:
+                                        skills,
+
+                                    experience:
+                                        experience,
+
+                                    domain:
+                                        domain
+
+                                })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.message;
+
+                    message.style.color =
+                        "#dc2626";
+
+                    return;
+
+                }
+
+
+                message.textContent =
+                    "Profile saved successfully!";
+
+                message.style.color =
+                    "#16a34a";
+
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "/interview";
+
+                    },
+                    1000
+                );
+
+
+            } catch (error) {
+
+                message.textContent =
+                    "Unable to connect to the server.";
+
+                message.style.color =
+                    "#dc2626";
+
+                console.error(error);
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Questions | Virtual Interview Assistant &amp; Evaluating System</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1f5f9,
+                    #e0e7ff
+                );
+
+            color: #1e293b;
+
+            min-height: 100vh;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e3a8a
+                );
+
+            color: white;
+
+            padding: 18px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 4px 15px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.18
+                );
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .brand-icon {
+
+            font-size: 27px;
+        }
+
+
+        .brand-text {
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+
+        .admin-badge {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.2
+                );
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            color: #dbeafe;
+        }
+
+
+        /* ==========================================
+           MAIN CONTAINER
+        ========================================== */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 1250px;
+
+            margin: 40px auto 60px;
+        }
+
+
+        /* ==========================================
+           PAGE HEADER
+        ========================================== */
+
+        .page-header {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 28px 30px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.08
+                );
+        }
+
+
+        .page-header-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .page-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+
+        .title-icon {
+
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 14px;
+
+            background: #eff6ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+
+        .page-title h1 {
+
+            color: #0f172a;
+
+            font-size: 26px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .page-title p {
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* ==========================================
+           BUTTONS
+        ========================================== */
+
+        .header-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            padding: 11px 17px;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            border: none;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .back-button {
+
+            background: #f1f5f9;
+
+            color: #334155;
+
+            border:
+                1px solid #cbd5e1;
+        }
+
+
+        .back-button:hover {
+
+            background: #e2e8f0;
+        }
+
+
+        .add-button {
+
+            background: #2563eb;
+
+            color: white;
+        }
+
+
+        .add-button:hover {
+
+            background: #1d4ed8;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* ==========================================
+           QUESTION LIST CARD
+        ========================================== */
+
+        .questions-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.08
+                );
+
+            overflow: hidden;
+        }
+
+
+        .card-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+
+            gap: 15px;
+        }
+
+
+        .card-header h2 {
+
+            color: #0f172a;
+
+            font-size: 20px;
+        }
+
+
+        .question-count {
+
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        /* ==========================================
+           TABLE
+        ========================================== */
+
+        .table-wrapper {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius: 13px;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 950px;
+        }
+
+
+        th {
+
+            background: #f8fafc;
+
+            color: #475569;
+
+            font-size: 12px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.4px;
+
+            font-weight: 700;
+
+            padding: 14px;
+
+            text-align: left;
+
+            border-bottom:
+                1px solid #e2e8f0;
+
+            white-space: nowrap;
+        }
+
+
+        td {
+
+            padding: 16px 14px;
+
+            border-bottom:
+                1px solid #e2e8f0;
+
+            vertical-align: top;
+
+            color: #334155;
+
+            font-size: 13px;
+
+            line-height: 1.55;
+        }
+
+
+        tbody tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        tbody tr:hover {
+
+            background: #f8fafc;
+        }
+
+
+        .id-cell {
+
+            color: #64748b;
+
+            font-weight: 600;
+
+            width: 60px;
+        }
+
+
+        .domain-badge {
+
+            display: inline-block;
+
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            padding: 6px 10px;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .difficulty-badge {
+
+            display: inline-block;
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+            padding: 6px 10px;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .question-text {
+
+            min-width: 220px;
+
+            max-width: 330px;
+
+            color: #1e293b;
+
+            font-weight: 500;
+        }
+
+
+        .expected-answer {
+
+            min-width: 220px;
+
+            max-width: 330px;
+
+            color: #64748b;
+        }
+
+
+        /* ==========================================
+           ACTION BUTTONS
+        ========================================== */
+
+        .actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            white-space: nowrap;
+        }
+
+
+        .edit-button {
+
+            display: inline-block;
+
+            padding: 7px 11px;
+
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            border:
+                1px solid #bfdbfe;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+
+        .edit-button:hover {
+
+            background: #dbeafe;
+        }
+
+
+        .delete-button {
+
+            padding: 7px 11px;
+
+            background: #fef2f2;
+
+            color: #dc2626;
+
+            border:
+                1px solid #fecaca;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+
+        .delete-button:hover {
+
+            background: #fee2e2;
+        }
+
+
+        /* ==========================================
+           EMPTY STATE
+        ========================================== */
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 60px 20px;
+        }
+
+
+        .empty-icon {
+
+            width: 65px;
+
+            height: 65px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #f1f5f9;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+
+        .empty-state h3 {
+
+            color: #334155;
+
+            margin-bottom: 8px;
+
+            font-size: 18px;
+        }
+
+
+        .empty-state p {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 20px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 650px) {
+
+            header {
+
+                padding:
+                    16px 5%;
+            }
+
+
+            .brand-text {
+
+                font-size: 17px;
+            }
+
+
+            .admin-badge {
+
+                display: none;
+            }
+
+
+            .container {
+
+                width: 94%;
+
+                margin-top: 25px;
+            }
+
+
+            .page-header {
+
+                padding: 22px;
+            }
+
+
+            .page-header-top {
+
+                align-items: stretch;
+
+                flex-direction: column;
+            }
+
+
+            .header-actions {
+
+                width: 100%;
+
+                flex-direction: column;
+            }
+
+
+            .button {
+
+                width: 100%;
+            }
+
+
+            .questions-card {
+
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header>
+
+    <div class="brand">
+
+        <span class="brand-icon">
+            🎯
+        </span>
+
+        <span class="brand-text">
+            Virtual Interview Assistant
+        </span>
+
+    </div>
+
+
+    <div class="admin-badge">
+        🔐 Administrator
+    </div>
+
+</header>
+
+
+<!-- ==========================================
+     MAIN CONTENT
+========================================== -->
+
+<main class="container">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="page-header-top">
+
+
+            <div class="page-title">
+
+                <div class="title-icon">
+                    📝
+                </div>
+
+
+                <div>
+
+                    <h1>
+                        Question Management
+                    </h1>
+
+                    <p>
+                        Manage the questions available
+                        for candidate interviews.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <a
+                    href="/admin-dashboard"
+                    class="button back-button">
+
+                    ← Back to Dashboard
+
+                </a>
+
+
+                <a
+                    href="/admin-add-question"
+                    class="button add-button">
+
+                    ➕ Add Question
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUESTIONS -->
+
+    <section class="questions-card">
+
+
+        <div class="card-header">
+
+            <h2>
+                Question Bank
+            </h2>
+
+
+            {% if questions %}
+
+            <span class="question-count">
+
+                {{ questions|length }}
+                Question{% if questions|length != 1 %}s{% endif %}
+
+            </span>
+
+            {% endif %}
+
+        </div>
+
+
+        {% if questions %}
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Domain
+                        </th>
+
+                        <th>
+                            Difficulty
+                        </th>
+
+                        <th>
+                            Question
+                        </th>
+
+                        <th>
+                            Expected Answer
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for question in questions %}
+
+
+                    <tr>
+
+
+                        <td class="id-cell">
+
+                            #{{ question["id"] }}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="domain-badge">
+
+                                {{ question["domain"] }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="difficulty-badge">
+
+                                {{ question["difficulty"] }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td class="question-text">
+
+                            {{ question["question"] }}
+
+                        </td>
+
+
+                        <td class="expected-answer">
+
+                            {{ question["expected_answer"] }}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="actions">
+
+
+                                <a
+                                    href="/admin-edit-question/{{ question['id'] }}"
+                                    class="edit-button">
+
+                                    ✏️ Edit
+
+                                </a>
+
+
+                                <form
+                                    action="/admin-delete-question/{{ question['id'] }}"
+                                    method="POST"
+                                    style="display:inline;">
+
+                                    <button
+                                        type="submit"
+                                        class="delete-button"
+                                        onclick="return confirm('Delete this question?');">
+
+                                        🗑 Delete
+
+                                    </button>
+
+                                </form>
+
+
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                📝
+            </div>
+
+
+            <h3>
+                No Questions Added Yet
+            </h3>
+
+
+            <p>
+                Start building your custom question bank
+                by adding the first interview question.
+            </p>
+
+
+            <a
+                href="/admin-add-question"
+                class="button add-button">
+
+                ➕ Add First Question
+
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    Virtual Interview Assistant
+    &nbsp;•&nbsp;
+    Admin Question Management
+
+</footer>
+
+
+</body>
+
+</html>

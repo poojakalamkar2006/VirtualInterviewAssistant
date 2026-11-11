@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resume Analysis | Virtual Interview Assistant &amp; Evaluating System</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background: #f1f5f9;
+
+            color: #1e293b;
+        }
+
+
+        .header {
+
+            background: linear-gradient(
+                135deg,
+                #0f172a,
+                #1e3a8a
+            );
+
+            color: white;
+
+            padding: 22px 7%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .brand {
+
+            font-size: 22px;
+
+            font-weight: bold;
+        }
+
+
+        .candidate-badge {
+
+            background: rgba(255,255,255,0.15);
+
+            padding: 8px 16px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+        }
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 950px;
+
+            margin: 50px auto;
+        }
+
+
+        .intro {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .intro h1 {
+
+            font-size: 32px;
+
+            color: #0f172a;
+
+            margin-bottom: 10px;
+        }
+
+
+        .intro p {
+
+            color: #64748b;
+
+            font-size: 16px;
+        }
+
+
+        .card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(15, 23, 42, 0.08);
+        }
+
+
+        .card h2 {
+
+            color: #0f172a;
+
+            margin-bottom: 20px;
+        }
+
+
+        .file-info {
+
+            background: #f8fafc;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .file-info strong {
+
+            color: #1e3a8a;
+        }
+
+
+        .skills-box {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+
+        .skill {
+
+            background: #dbeafe;
+
+            color: #1e40af;
+
+            padding: 9px 15px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        .no-skills {
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        .text-box {
+
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            max-height: 300px;
+
+            overflow-y: auto;
+
+            white-space: pre-wrap;
+
+            line-height: 1.6;
+
+            color: #475569;
+        }
+
+
+        .actions {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+
+        .button {
+
+            flex: 1;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .primary {
+
+            background: #2563eb;
+
+            color: white;
+        }
+
+
+        .primary:hover {
+
+            background: #1d4ed8;
+        }
+
+
+        .secondary {
+
+            background: #e2e8f0;
+
+            color: #334155;
+        }
+
+
+        .secondary:hover {
+
+            background: #cbd5e1;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header {
+
+                padding: 18px 5%;
+            }
+
+
+            .brand {
+
+                font-size: 18px;
+            }
+
+
+            .container {
+
+                width: 92%;
+
+                margin: 30px auto;
+            }
+
+
+            .intro h1 {
+
+                font-size: 26px;
+            }
+
+
+            .card {
+
+                padding: 25px;
+            }
+
+
+            .actions {
+
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <header class="header">
+
+        <div class="brand">
+            Virtual Interview Assistant
+        </div>
+
+        <div class="candidate-badge">
+            Candidate
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+
+        <div class="intro">
+
+            <h1>
+                Resume Analysis
+            </h1>
+
+            <p>
+                Your uploaded resume has been successfully processed.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                Uploaded Resume
+            </h2>
+
+
+            <div class="file-info">
+
+                <p>
+                    <strong>File:</strong>
+                    {{ resume["file_name"] }}
+                </p>
+
+                <br>
+
+                <p>
+                    <strong>Uploaded:</strong>
+                    {{ resume["uploaded_at"] }}
+                </p>
+
+            </div>
+
+
+            <h2>
+                Detected Skills
+            </h2>
+
+
+            <div class="skills-box">
+
+                {% if resume["skills"] %}
+
+                    {% for skill in resume["skills"].split(",") %}
+
+                        <span class="skill">
+                            {{ skill.strip() }}
+                        </span>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <span class="no-skills">
+                        Skill detection will be available in the next step.
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                Extracted Resume Text
+            </h2>
+
+
+            <div class="text-box">
+                {{ resume["resume_text"] }}
+            </div>
+
+        </div>
+        <div class="actions">
+
+    <a
+        href="/resume"
+        class="button secondary"
+    >
+        ← Upload Another Resume
+    </a>
+
+    <a
+        href="/resume-interview-settings?user_id={{ resume['user_id'] }}"
+        class="button primary"
+    >
+        Start Resume Interview
+    </a>
+
+</div>
+
+
+        
+
+
+    </main>
+
+
+</body>
+
+</html>
